@@ -18,7 +18,7 @@ app.use("/api/enquiry",enquiryRoutes);
 mongoose.connect(process.env.DB_URL).then(() => {
     console.log("DATABASE SUCCESSFULLY CONNECTED");
     app.listen(process.env.PORT,()=>{
-        console.log(`APP STARTED ON PORT- ${process.env.PORT}`);
+        console.log(`APPLICATION STARTED ON PORT- ${process.env.PORT}`);
     })
 }).catch((err) => {
     console.log(err);
