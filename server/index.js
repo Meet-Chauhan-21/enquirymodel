@@ -6,8 +6,9 @@ const enquiryRoutes = require("./App/routes/web/enquiryRoutes");
 const app = express();
 require("dotenv").config();
 app.use(express.json());
-app.use(cors());
-
+app.use(cors({
+  origin: process.env.CLIENT_ORIGIN || '*'
+}));
 
 // CALLING ROUTES
 app.use("/api/enquiry",enquiryRoutes);
