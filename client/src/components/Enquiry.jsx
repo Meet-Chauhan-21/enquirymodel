@@ -7,7 +7,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js'
 const Enquiry = () => {
 
   const [enquiryList, setEnquiryList] = useState([]);
-
+  const BASE_URL = process.env.REACT_APP_URL;
   const [formData, setFormData] = useState({
     name:'',
     email:'',
@@ -27,7 +27,7 @@ const Enquiry = () => {
     // }
 
           if(formData._id){
-              axios.put(`${process.env.BASE_URL}/api/enquiry/enquiryupdate/${formData._id}`,formData)
+              axios.put(`${BASE_URL}/api/enquiry/enquiryupdate/${formData._id}`,formData)
               .then((res)=>{
                 toast.success("Enquiry Update Successfully.!");
                 setFormData({
@@ -42,7 +42,7 @@ const Enquiry = () => {
 
           }else{
             
-              axios.post(`${process.env.BASE_URL}/api/enquiry/enquiryinsert`, formData)
+              axios.post(`${BASE_URL}/api/enquiry/enquiryinsert`, formData)
               .then((res) => {
           
                 console.log(res.data);
@@ -66,7 +66,7 @@ const Enquiry = () => {
       }
 
       const getEnquiry = () => {
-        axios.get(`${process.env.BASE_URL}/api/enquiry/enquirylist`)
+        axios.get(`${BASE_URL}/api/enquiry/enquirylist`)
 
         .then((res)=>{
           return res.data
