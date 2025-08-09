@@ -16,11 +16,15 @@ app.use("/api/enquiry",enquiryRoutes);
 
 
 // CONNECT TO MONGO-DB
-mongoose.connect(process.env.DB_URL).then(() => {
+const PORT = process.env.PORT || 9191;
+
+mongoose.connect(process.env.DB_URL)
+  .then(() => {
     console.log("DATABASE SUCCESSFULLY CONNECTED");
-    app.listen(process.env.PORT,()=>{
-        console.log(`APPLICATION STARTED ON PORT- ${process.env.PORT}`);
-    })
-}).catch((err) => {
+    app.listen(PORT, () => {
+      console.log(`APPLICATION STARTED ON PORT ${PORT}`);
+    });
+  })
+  .catch((err) => {
     console.log(err);
-});
+  });
