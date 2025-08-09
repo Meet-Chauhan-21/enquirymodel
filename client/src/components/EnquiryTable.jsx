@@ -15,7 +15,7 @@ const EnquiryTable = ({ data,getEnquiry,Swal,setFormData}) => {
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            axios.delete(`http://localhost:9191/api/enquiry/enquiryremove/${delid}`)
+            axios.delete(`${process.env.BASE_URL}/api/enquiry/enquiryremove/${delid}`)
             .then((res)=>{
                 toast.success("Enquiry Delete Successfully.!");
                 getEnquiry();
@@ -29,7 +29,7 @@ const EnquiryTable = ({ data,getEnquiry,Swal,setFormData}) => {
     }
 
     const editRow = (editId) => {
-        axios.get(`http://localhost:9191/api/enquiry/enquiryedit/${editId}`)
+        axios.get(`${process.env.BASE_URL}/api/enquiry/enquiryedit/${editId}`)
         .then((res) => {
             let data = res.data.enquiry;
             setFormData(data); // ✅ Correct usage
