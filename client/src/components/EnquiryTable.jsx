@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
+const API_BASE_URL = process.env.REACT_APP_URL;
+
 
 const EnquiryTable = ({ data,getEnquiry,Swal,setFormData}) => {
 
@@ -15,7 +17,7 @@ const EnquiryTable = ({ data,getEnquiry,Swal,setFormData}) => {
         }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            axios.delete(`http://localhost:9191/api/enquiry/enquiryremove/${delid}`)
+            axios.delete(`${API_BASE_URL}/api/enquiry/enquiryremove/${delid}`)
             .then((res)=>{
                 toast.success("Enquiry Delete Successfully.!");
                 getEnquiry();
@@ -29,7 +31,7 @@ const EnquiryTable = ({ data,getEnquiry,Swal,setFormData}) => {
     }
 
     const editRow = (editId) => {
-        axios.get(`http://localhost:9191/api/enquiry/enquiryedit/${editId}`)
+        axios.get(`${API_BASE_URL}/api/enquiry/enquiryedit/${editId}`)
         .then((res) => {
             let data = res.data.enquiry;
             setFormData(data); // ✅ Correct usage

@@ -4,6 +4,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
+const API_BASE_URL = process.env.REACT_APP_URL;
+
 const Enquiry = () => {
 
   const [enquiryList, setEnquiryList] = useState([]);
@@ -27,7 +29,7 @@ const Enquiry = () => {
     // }
 
           if(formData._id){
-              axios.put(`http://localhost:9191/api/enquiry/enquiryupdate/${formData._id}`,formData)
+              axios.put(`${API_BASE_URL}/api/enquiry/enquiryupdate/${formData._id}`,formData)
               .then((res)=>{
                 toast.success("Enquiry Update Successfully.!");
                 setFormData({
@@ -42,7 +44,7 @@ const Enquiry = () => {
 
           }else{
             
-              axios.post("http://localhost:9191/api/enquiry/enquiryinsert", formData)
+              axios.post(`${API_BASE_URL}/api/enquiry/enquiryinsert`, formData)
               .then((res) => {
           
                 console.log(res.data);
@@ -66,7 +68,7 @@ const Enquiry = () => {
       }
 
       const getEnquiry = () => {
-        axios.get("http://localhost:9191/api/enquiry/enquirylist")
+        axios.get(`${API_BASE_URL}/api/enquiry/enquirylist`)
 
         .then((res)=>{
           return res.data
