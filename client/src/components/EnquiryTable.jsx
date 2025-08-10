@@ -144,25 +144,25 @@ const EnquiryTable = ({ data, getEnquiry, Swal, setFormData, darkMode = false })
             </div>
 
             {/* Desktop Table View */}
-            <div className="hidden md:block overflow-x-auto">
-              <table className="w-full">
+            <div className="hidden md:block">
+              <table className="w-full table-fixed">
                 <thead>
                   <tr className={`border-b-2 ${
                     darkMode ? 'border-gray-600' : 'border-gray-200'
                   }`}>
-                    <th className={`text-left py-4 px-4 font-semibold ${
+                    <th className={`text-left py-4 px-4 font-semibold w-1/5 ${
                       darkMode ? 'text-gray-200' : 'text-gray-700'
                     }`}>Name</th>
-                    <th className={`text-left py-4 px-4 font-semibold ${
+                    <th className={`text-left py-4 px-4 font-semibold w-1/4 ${
                       darkMode ? 'text-gray-200' : 'text-gray-700'
                     }`}>Email</th>
-                    <th className={`text-left py-4 px-4 font-semibold ${
+                    <th className={`text-left py-4 px-4 font-semibold w-1/6 ${
                       darkMode ? 'text-gray-200' : 'text-gray-700'
                     }`}>Phone</th>
-                    <th className={`text-left py-4 px-4 font-semibold ${
+                    <th className={`text-left py-4 px-4 font-semibold w-1/4 ${
                       darkMode ? 'text-gray-200' : 'text-gray-700'
                     }`}>Message</th>
-                    <th className={`text-center py-4 px-4 font-semibold w-40 min-w-[160px] ${
+                    <th className={`text-center py-4 px-4 font-semibold w-1/6 ${
                       darkMode ? 'text-gray-200' : 'text-gray-700'
                     }`}>Actions</th>
                   </tr>
@@ -173,51 +173,40 @@ const EnquiryTable = ({ data, getEnquiry, Swal, setFormData, darkMode = false })
                       <tr key={index} className={`hover:${
                         darkMode ? 'bg-gray-700' : 'bg-gray-50'
                       } transition-colors duration-150`}>
-                        <td className={`px-6 py-4 whitespace-nowrap text-sm font-medium ${
-                          darkMode ? 'text-gray-200' : 'text-gray-900'
-                        }`}>
-                          {index + 1}
-                        </td>
-                        <td className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        <td className={`px-4 py-4 text-sm ${
                           darkMode ? 'text-gray-300' : 'text-gray-700'
                         }`}>
                           {item.name}
                         </td>
-                        <td className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        <td className={`px-4 py-4 text-sm ${
                           darkMode ? 'text-gray-300' : 'text-gray-700'
                         }`}>
                           {item.email}
                         </td>
-                        <td className={`px-6 py-4 whitespace-nowrap text-sm ${
+                        <td className={`px-4 py-4 text-sm ${
                           darkMode ? 'text-gray-300' : 'text-gray-700'
                         }`}>
                           {item.phone}
                         </td>
-                        <td className={`px-6 py-4 text-sm max-w-xs truncate ${
+                        <td className={`px-4 py-4 text-sm truncate ${
                           darkMode ? 'text-gray-300' : 'text-gray-700'
                         }`} title={item.message}>
                           {item.message}
                         </td>
-                        <td className="px-4 py-4 whitespace-nowrap text-sm w-40 min-w-[160px]">
-                          <div className="flex space-x-1">
+                        <td className="px-2 py-4 text-center">
+                          <div className="flex flex-col space-y-1">
                             <button
                               onClick={() => editRow(item._id)}
-                              className="inline-flex items-center px-2 py-1.5 text-xs font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-150 shadow-sm"
+                              className="w-full px-2 py-1 text-xs font-medium rounded text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-150"
                               title="Edit enquiry"
                             >
-                              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                              </svg>
                               Edit
                             </button>
                             <button
                               onClick={() => deleteRow(item._id)}
-                              className="inline-flex items-center px-2 py-1.5 text-xs font-medium rounded-lg text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-150 shadow-sm"
+                              className="w-full px-2 py-1 text-xs font-medium rounded text-white bg-red-600 hover:bg-red-700 transition-colors duration-150"
                               title="Delete enquiry"
                             >
-                              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
                               Delete
                             </button>
                           </div>
