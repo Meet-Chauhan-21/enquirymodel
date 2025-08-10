@@ -9,22 +9,44 @@ const EnquiryTable = ({ data, getEnquiry, Swal, setFormData, darkMode = false })
     const deleteRow = (delid) => {
 
         Swal.fire({
-        title: "Do you want to Delete Data ?",
-        showDenyButton: true,
-        showCancelButton: true,
-        confirmButtonText: "Delete",
+            title: "Delete Enquiry?",
+            text: "This action cannot be undone!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#dc2626",
+            cancelButtonColor: "#6b7280",
+            confirmButtonText: "Yes, Delete!",
+            cancelButtonText: "Cancel",
+            background: darkMode ? '#1f2937' : '#ffffff',
+            color: darkMode ? '#ffffff' : '#000000',
+            customClass: {
+                popup: darkMode ? 'dark-popup' : '',
+                title: darkMode ? 'text-white' : '',
+                htmlContainer: darkMode ? 'text-gray-300' : ''
+            }
         }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-            axios.delete(`${API_BASE_URL}/api/enquiry/enquiryremove/${delid}`)
-            .then((res)=>{
-                toast.success("Enquiry Delete Successfully.!");
-                getEnquiry();
-            })
-            
-        } else if (result.isDenied) {
-            Swal.fire("Changes are not saved", "", "info");
-        }
+            if (result.isConfirmed) {
+                axios.delete(`${API_BASE_URL}/api/enquiry/enquiryremove/${delid}`)
+                .then((res)=>{
+                    toast.success("Enquiry deleted successfully!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        theme: darkMode ? 'dark' : 'light'
+                    });
+                    getEnquiry();
+                })
+                .catch((err) => {
+                    toast.error("Failed to delete enquiry!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        theme: darkMode ? 'dark' : 'light'
+                    });
+                });
+            }
         });
 
     }
@@ -109,7 +131,7 @@ const EnquiryTable = ({ data, getEnquiry, Swal, setFormData, darkMode = false })
                       }`}>
                         Message
                       </th>
-                      <th className={`px-6 py-4 text-left text-xs font-medium uppercase tracking-wider ${
+                      <th className={`px-6 py-4 text-left text-xs font-medium uppercase tracking-wider w-32 ${
                         darkMode ? 'text-gray-300' : 'text-gray-500'
                       }`}>
                         Actions
@@ -149,25 +171,29 @@ const EnquiryTable = ({ data, getEnquiry, Swal, setFormData, darkMode = false })
                           }`} title={item.message}>
                             {item.message}
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm space-x-2">
-                            <button
-                              onClick={() => editRow(item._id)}
-                              className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150"
-                            >
-                              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                              </svg>
-                              Edit
-                            </button>
-                            <button
-                              onClick={() => deleteRow(item._id)}
-                              className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-150"
-                            >
-                              <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                              </svg>
-                              Delete
-                            </button>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">
+                            <div className="flex space-x-2">
+                              <button
+                                onClick={() => editRow(item._id)}
+                                className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-150"
+                                title="Edit enquiry"
+                              >
+                                <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                </svg>
+                                Edit
+                              </button>
+                              <button
+                                onClick={() => deleteRow(item._id)}
+                                className="inline-flex items-center px-2 py-1 border border-transparent text-xs font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors duration-150"
+                                title="Delete enquiry"
+                              >
+                                <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                </svg>
+                                Del
+                              </button>
+                            </div>
                           </td>
                         </tr>
                       ))

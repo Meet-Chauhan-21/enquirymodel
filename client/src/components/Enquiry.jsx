@@ -35,7 +35,15 @@ const Enquiry = ({ darkMode = false }) => {
           if(formData._id){
               axios.put(`${API_BASE_URL}/api/enquiry/enquiryupdate/${formData._id}`,formData)
               .then((res)=>{
-                toast.success("Enquiry Update Successfully.!");
+                toast.success("Enquiry updated successfully!", {
+                  position: "top-right",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  theme: darkMode ? 'dark' : 'light'
+                });
                 setFormData({
                   name:'',
                   email:'',
@@ -45,6 +53,13 @@ const Enquiry = ({ darkMode = false }) => {
                 })
                 getEnquiry(); 
               })
+              .catch((err) => {
+                toast.error("Failed to update enquiry!", {
+                  position: "top-right",
+                  autoClose: 3000,
+                  theme: darkMode ? 'dark' : 'light'
+                });
+              })
 
           }else{
             
@@ -52,7 +67,15 @@ const Enquiry = ({ darkMode = false }) => {
               .then((res) => {
           
                 console.log(res.data);
-                toast.success("Enquiry saved successfully!")
+                toast.success("Enquiry submitted successfully!", {
+                  position: "top-right",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                  theme: darkMode ? 'dark' : 'light'
+                });
           
                   setFormData({
                     name:'',
@@ -65,7 +88,11 @@ const Enquiry = ({ darkMode = false }) => {
               })
               .catch((err) => {
                 console.error("Error saving enquiry:", err);
-                alert("Failed to save enquiry.");
+                toast.error("Failed to save enquiry!", {
+                  position: "top-right",
+                  autoClose: 3000,
+                  theme: darkMode ? 'dark' : 'light'
+                });
               });
           }
 

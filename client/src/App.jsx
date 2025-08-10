@@ -69,19 +69,25 @@ function App() {
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
-        newestOnTop={false}
+        newestOnTop={true}
         closeOnClick
         rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
         theme={darkMode ? 'dark' : 'light'}
-        className="mt-16"
+        className="!mt-20"
+        style={{ zIndex: 9999 }}
         toastClassName={() => 
-          `relative flex p-1 min-h-10 rounded-md justify-between overflow-hidden cursor-pointer ${
+          `relative flex p-3 min-h-10 rounded-lg justify-between overflow-hidden cursor-pointer shadow-lg ${
             darkMode 
-              ? 'bg-gray-800 text-white' 
-              : 'bg-white text-gray-900'
+              ? 'bg-gray-800 text-white border border-gray-700' 
+              : 'bg-white text-gray-900 border border-gray-200'
+          }`
+        }
+        bodyClassName={() => 
+          `flex text-sm font-medium ${
+            darkMode ? 'text-white' : 'text-gray-900'
           }`
         }
       />
