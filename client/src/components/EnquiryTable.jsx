@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-const API_BASE_URL = process.env.REACT_APP_URL || 'https://enquirymodel.onrender.com';
+const API_BASE_URL = 'https://enquirymodel.onrender.com';
 
 
 const EnquiryTable = ({ data,getEnquiry,Swal,setFormData}) => {

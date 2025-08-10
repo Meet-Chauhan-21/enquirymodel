@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-const API_BASE_URL = process.env.REACT_APP_URL || 'https://enquirymodel.onrender.com';
+const API_BASE_URL = 'https://enquirymodel.onrender.com';
 
 const Enquiry = () => {
   
