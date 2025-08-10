@@ -115,6 +115,24 @@ const Enquiry = () => {
 
         oldData[inputName] = inputValue;
         setFormData(oldData);
+      }
+
+      const clearForm = () => {
+        setFormData({
+          name:'',
+          email:'',
+          phone:'',
+          message:'',
+          _id:''
+        });
+        toast.info("🧹 Form cleared successfully!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
       }  
 
 
@@ -143,7 +161,7 @@ const Enquiry = () => {
           <p className='text-gray-600 text-lg'>Manage customer enquiries efficiently</p>
         </div>
 
-        <div className='grid lg:grid-cols-[35%_auto] gap-8'>
+        <div className='grid xl:grid-cols-[35%_auto] lg:grid-cols-1 gap-8'>
           <div className='bg-white shadow-xl rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300'>
             <div className='flex items-center mb-6'>
               <div className='bg-blue-100 p-3 rounded-full mr-4'>
@@ -208,12 +226,21 @@ const Enquiry = () => {
                 ></textarea>
               </div>
 
-              <button
-                type="submit"
-                className="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-indigo-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300"
-              >
-                {formData._id ? '✏️ Update Enquiry' : '📝 Submit Enquiry'}
-              </button>
+              <div className="flex flex-col sm:flex-row gap-3 mt-6">
+                <button
+                  type="submit"
+                  className="flex-1 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-indigo-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300"
+                >
+                  {formData._id ? '✏️ Update Enquiry' : '📝 Submit Enquiry'}
+                </button>
+                <button
+                  type="button"
+                  onClick={clearForm}
+                  className="sm:w-auto w-full bg-gradient-to-r from-gray-500 to-gray-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-gray-600 hover:to-gray-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-gray-300"
+                >
+                  🧹 Clear Form
+                </button>
+              </div>
           
           </form>
 
