@@ -55,19 +55,37 @@ const Enquiry = ({ darkMode = false }) => {
     }
 
     if (!formData.phone.trim()) {
-      toast.error("Please enter your phone number", {
-        position: "top-right",
-        autoClose: 3000,
-        theme: darkMode ? 'dark' : 'light'
+      Swal.fire({
+        title: "Phone Number Required",
+        text: "Please enter your phone number to continue.",
+        icon: "warning",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#3b82f6",
+        background: darkMode ? '#1f2937' : '#ffffff',
+        color: darkMode ? '#ffffff' : '#000000',
+        customClass: {
+          popup: darkMode ? 'dark-popup' : '',
+          title: darkMode ? 'text-white' : '',
+          htmlContainer: darkMode ? 'text-gray-300' : ''
+        }
       });
       return;
     }
 
     if (!validatePhone(formData.phone)) {
-      toast.error("Please enter a valid phone number (10-15 digits)", {
-        position: "top-right",
-        autoClose: 3000,
-        theme: darkMode ? 'dark' : 'light'
+      Swal.fire({
+        title: "Invalid Phone Number",
+        text: "Please enter a valid phone number (10-15 digits). You can include country code, spaces, dashes, or parentheses.",
+        icon: "error",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#ef4444",
+        background: darkMode ? '#1f2937' : '#ffffff',
+        color: darkMode ? '#ffffff' : '#000000',
+        customClass: {
+          popup: darkMode ? 'dark-popup' : '',
+          title: darkMode ? 'text-white' : '',
+          htmlContainer: darkMode ? 'text-gray-300' : ''
+        }
       });
       return;
     }
