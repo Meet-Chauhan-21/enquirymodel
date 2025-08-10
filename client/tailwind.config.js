@@ -6,6 +6,7 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
     "node_modules/flowbite-react/**/*.js", // ✅ important for Flowbite
   ],
+  darkMode: 'class', // Enable dark mode with class strategy
   theme: {
     extend: {},
   },
