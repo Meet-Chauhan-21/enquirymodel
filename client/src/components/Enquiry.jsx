@@ -4,9 +4,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import axios from "axios";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
-const API_BASE_URL = process.env.REACT_APP_URL;
+const API_BASE_URL = process.env.REACT_APP_URL || 'https://enquirymodel.onrender.com';
 
 const Enquiry = () => {
+  
+  // Debug logging
+  console.log('Environment variable REACT_APP_URL:', process.env.REACT_APP_URL);
+  console.log('Final API_BASE_URL:', API_BASE_URL);
 
   const [enquiryList, setEnquiryList] = useState([]);
 
