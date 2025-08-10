@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import EnquiryTable from './EnquiryTable';
 import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Swal from 'sweetalert2/dist/sweetalert2.js'
 
@@ -35,7 +36,14 @@ const Enquiry = () => {
           if(formData._id){
               axios.put(`${API_BASE_URL}/api/enquiry/enquiryupdate/${formData._id}`,formData)
               .then((res)=>{
-                toast.success("Enquiry Update Successfully.!");
+                toast.success("✅ Enquiry updated successfully!", {
+                  position: "top-right",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                });
                 setFormData({
                   name:'',
                   email:'',
@@ -52,7 +60,14 @@ const Enquiry = () => {
               .then((res) => {
           
                 console.log(res.data);
-                toast.success("Enquiry saved successfully!")
+                toast.success("🎉 Enquiry saved successfully!", {
+                  position: "top-right",
+                  autoClose: 3000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                })
           
                   setFormData({
                     name:'',
@@ -65,7 +80,14 @@ const Enquiry = () => {
               })
               .catch((err) => {
                 console.error("Error saving enquiry:", err);
-                alert("Failed to save enquiry.");
+                toast.error("❌ Failed to save enquiry. Please try again.", {
+                  position: "top-right",
+                  autoClose: 4000,
+                  hideProgressBar: false,
+                  closeOnClick: true,
+                  pauseOnHover: true,
+                  draggable: true,
+                });
               });
           }
 
@@ -101,88 +123,109 @@ const Enquiry = () => {
       },[])
 
   return (
-    <div className='ml-[-70px]'>
-      <ToastContainer/>
-      <h1 className='font-bold p-5 text-[30px]'>User Enquiry</h1>
+    <div className='min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-6'>
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        className="mt-16"
+      />
+      <div className='max-w-7xl mx-auto'>
+        <div className='text-center mb-8'>
+          <h1 className='text-4xl font-bold text-gray-800 mb-2'>📋 Enquiry Management System</h1>
+          <p className='text-gray-600 text-lg'>Manage customer enquiries efficiently</p>
+        </div>
 
-      <div className='grid grid-cols-[30%_auto] gap-10'>
-        <div className='bg-gray-200 py-5 px-8 rounded-2xl'>
-          <h2 className='text-[20px] font-bold'>Enquiry Form</h2>
+        <div className='grid lg:grid-cols-[35%_auto] gap-8'>
+          <div className='bg-white shadow-xl rounded-3xl p-8 border border-gray-100 hover:shadow-2xl transition-all duration-300'>
+            <div className='flex items-center mb-6'>
+              <div className='bg-blue-100 p-3 rounded-full mr-4'>
+                <svg className='w-6 h-6 text-blue-600' fill='none' stroke='currentColor' viewBox='0 0 24 24'>
+                  <path strokeLinecap='round' strokeLinejoin='round' strokeWidth={2} d='M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z' />
+                </svg>
+              </div>
+              <h2 className='text-2xl font-bold text-gray-800'>New Enquiry</h2>
+            </div>
           
           <form action="" onSubmit={saveEnquiry}>
           
               <div className='mt-6'>
-                <label className="ml-3 text-left block text-sm font-medium text-gray-700 mb-1">Name</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">👤 Full Name</label>
                 <input
                   value={formData.name}
                   onChange={getData}
                   type="text"
                   name="name"
                   required
-                  placeholder="Your name"
-                  className="w-full border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter your full name"
+                  className="w-full border-2 border-gray-200 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder-gray-400 hover:border-gray-300"
                 />
               </div>
 
               <div>
-                <label  className="ml-3 mt-3 text-left block text-sm font-medium text-gray-700 mb-1">Email</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2 mt-5">📧 Email Address</label>
                 <input
                   value={formData.email}
                   onChange={getData}
                   type="email"
                   name="email"
                   required
-                  placeholder="you@example.com"
-                  className="w-full border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="your.email@example.com"
+                  className="w-full border-2 border-gray-200 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder-gray-400 hover:border-gray-300"
                 />
               </div>
 
               <div>
-                <label  className="ml-3 mt-3 text-left block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2 mt-5">📱 Phone Number</label>
                 <input
                   value={formData.phone}
                   onChange={getData}
                   type="tel"
                   name="phone"
                   required
-                  placeholder="123-456-7890"
-                  className="w-full border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="+1 (555) 123-4567"
+                  className="w-full border-2 border-gray-200 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder-gray-400 hover:border-gray-300"
                 />
               </div>
 
               <div>
-                <label  className="ml-3 mt-3 text-left block text-sm font-medium text-gray-700 mb-1">Message</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2 mt-5">💬 Message</label>
                 <textarea
                   value={formData.message}
                   onChange={getData}
                   name="message"
-                  rows="3"
+                  rows="4"
                   required
-                  placeholder="Write your message..."
-                  className="w-full border border-gray-300 p-2 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Please describe your enquiry in detail..."
+                  className="w-full border-2 border-gray-200 p-4 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder-gray-400 hover:border-gray-300 resize-none"
                 ></textarea>
               </div>
 
               <button
                 type="submit"
-                className="w-full mt-4 bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-200"
+                className="w-full mt-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-indigo-700 transform hover:scale-[1.02] transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-300"
               >
-                {formData._id ? 'Update' : 'Save'}
+                {formData._id ? '✏️ Update Enquiry' : '📝 Submit Enquiry'}
               </button>
           
           </form>
 
+          </div>
+          <EnquiryTable 
+            data={enquiryList} 
+            getEnquiry={getEnquiry}
+            Swal={Swal}
+            setFormData={setFormData}
+          />
         </div>
-      <EnquiryTable 
-      data={enquiryList} 
-      getEnquiry={getEnquiry}
-      Swal={Swal}
-      setFormData={setFormData}
-      />
-
-
       </div>
-
     </div>
   )
 }
