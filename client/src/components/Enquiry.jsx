@@ -228,7 +228,6 @@ const Enquiry = () => {
               </div>
 
               </div>
-              </div>
               <div className="flex flex-col sm:flex-row gap-3 mt-4 flex-shrink-0">
                 <button
                   type="submit"
