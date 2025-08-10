@@ -67,7 +67,7 @@ function App() {
       {/* Toast Container with Dark Theme Support */}
       <ToastContainer
         position="top-right"
-        autoClose={3000}
+        autoClose={4000}
         hideProgressBar={false}
         newestOnTop={true}
         closeOnClick
@@ -76,19 +76,25 @@ function App() {
         draggable
         pauseOnHover
         theme={darkMode ? 'dark' : 'light'}
-        className="!mt-20"
-        style={{ zIndex: 9999 }}
+        className="!mt-20 !mr-4"
+        style={{ 
+          zIndex: 9999,
+          fontSize: '14px'
+        }}
         toastClassName={() => 
-          `relative flex p-3 min-h-10 rounded-lg justify-between overflow-hidden cursor-pointer shadow-lg ${
+          `relative flex p-4 min-h-12 rounded-xl justify-between overflow-hidden cursor-pointer shadow-xl border-l-4 ${
             darkMode 
-              ? 'bg-gray-800 text-white border border-gray-700' 
-              : 'bg-white text-gray-900 border border-gray-200'
+              ? 'bg-gray-800 text-white border-gray-600 border-l-blue-500' 
+              : 'bg-white text-gray-900 border-gray-100 border-l-blue-500 shadow-gray-900/10'
           }`
         }
         bodyClassName={() => 
-          `flex text-sm font-medium ${
+          `flex text-sm font-semibold leading-relaxed ${
             darkMode ? 'text-white' : 'text-gray-900'
           }`
+        }
+        progressClassName={() =>
+          `${darkMode ? 'bg-blue-400' : 'bg-blue-500'}`
         }
       />
     </div>
