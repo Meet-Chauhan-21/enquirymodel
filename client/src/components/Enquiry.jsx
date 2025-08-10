@@ -25,12 +25,61 @@ const Enquiry = ({ darkMode = false }) => {
   const saveEnquiry = (e)=>{
     e.preventDefault();
     console.log("Enquiry Saved.");
-    // let formData = {
-    //   name: e.target.name.value,
-    //   email: e.target.email.value,
-    //   phone: e.target.phone.value,
-    //   message: e.target.message.value
-    // }
+
+    // Validation
+    if (!formData.name.trim()) {
+      toast.error("Please enter your name", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: darkMode ? 'dark' : 'light'
+      });
+      return;
+    }
+
+    if (!formData.email.trim()) {
+      toast.error("Please enter your email", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: darkMode ? 'dark' : 'light'
+      });
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      toast.error("Please enter a valid email address", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: darkMode ? 'dark' : 'light'
+      });
+      return;
+    }
+
+    if (!formData.phone.trim()) {
+      toast.error("Please enter your phone number", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: darkMode ? 'dark' : 'light'
+      });
+      return;
+    }
+
+    if (!validatePhone(formData.phone)) {
+      toast.error("Please enter a valid phone number (10-15 digits)", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: darkMode ? 'dark' : 'light'
+      });
+      return;
+    }
+
+    if (!formData.message.trim()) {
+      toast.error("Please enter your message", {
+        position: "top-right",
+        autoClose: 3000,
+        theme: darkMode ? 'dark' : 'light'
+      });
+      return;
+    }
 
           if(formData._id){
               axios.put(`${API_BASE_URL}/api/enquiry/enquiryupdate/${formData._id}`,formData)
@@ -135,6 +184,17 @@ const Enquiry = ({ darkMode = false }) => {
           autoClose: 2000,
           theme: darkMode ? 'dark' : 'light'
         });
+      }
+
+      // Validation functions
+      const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+      }
+
+      const validatePhone = (phone) => {
+        const phoneRegex = /^[+]?[\d\s\-\(\)]{10,15}$/;
+        return phoneRegex.test(phone.replace(/\s/g, ''));
       }
 
       useEffect(()=>{
